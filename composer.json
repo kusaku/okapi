@@ -1,5 +1,5 @@
 {
-	"name": "kusaku/vkapi",
+	"name": "fsapi",
 	"description": "Lightweight FS API",
 	"homepage": "http://fotostrana.ru/api/doc/",
 	"license": "GPL-3.0",
@@ -12,7 +12,7 @@
 	"repositories": [
 		{
 			"type": "vcs",
-			"url": "https://github.com/kusaku/fsapi"
+			"url": "gitlab@git.cloudmach.ru:cos/fsapi.git"
 		}
 	]
 }
