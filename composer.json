@@ -1,7 +1,7 @@
 {
 	"name": "kusaku/vkapi",
-	"description": "Lightweight VK API",
-	"homepage": "http://vk.com/dev",
+	"description": "Lightweight FS API",
+	"homepage": "http://fotostrana.ru/api/doc/",
 	"license": "GPL-3.0",
 	"require": {
 		"php": ">=5.3.0"
@@ -12,7 +12,7 @@
 	"repositories": [
 		{
 			"type": "vcs",
-			"url": "https://github.com/kusaku/vkapi"
+			"url": "https://github.com/kusaku/fsapi"
 		}
 	]
 }
