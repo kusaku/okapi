@@ -58,12 +58,12 @@ class FSAPI {
 	}
 
 	public function sign($params, $client) {
+		$sig = $client ? @$params['userId'] : '';
 		ksort($params);
-		$sig = $client ? $client : '';
 		foreach ($params as $k => $v) {
 			$sig .= $k . '=' . $v;
 		}
-		$sig .= $client ? $this->server_key : $this->client_key;
+		$sig .= $client ? $this->client_key : $this->server_key;
 
 		return md5($sig);
 	}
