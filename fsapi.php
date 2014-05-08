@@ -68,11 +68,19 @@ class FSAPI {
 		return md5($sig);
 	}
 
+	public function validate($params) {
+		if (isset($params['sig'])) {
+			$sig = $params['sig'];
+			unset($params['sig']);
+
+			return $sig == $this->sign($params, false);
+		}
+
+		return false;
+	}
+
 	public function response($data) {
-		return json_encode(
-			array(
-				'response' => $data
-			));
+		return json_encode($data);
 	}
 
 	public function upload($url, $files) {
