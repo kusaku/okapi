@@ -1,7 +1,7 @@
 {
-	"name": "fsapi",
-	"description": "Lightweight FS API",
-	"homepage": "http://fotostrana.ru/api/doc/",
+	"name": "okapi",
+	"description": "Lightweight Odnoklassniki API",
+	"homepage": "http://apiok.ru/",
 	"license": "GPL-3.0",
 	"require": {
 		"php": ">=5.3.0"
@@ -12,7 +12,7 @@
 	"repositories": [
 		{
 			"type": "vcs",
-			"url": "gitlab@git.cloudmach.ru:cos/fsapi.git"
+			"url": "https://github.com/kusaku/okapi"
 		}
 	]
 }
