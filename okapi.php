@@ -72,22 +72,25 @@ class OKAPI {
 		return md5($sig);
 	}
 
-	public function response($data) {
-		return json_encode(
-			array(
-				'response' => $data
-			));
+	public function validate($params) {
+		if (isset($params['sig'])) {
+			$sig = $params['sig'];
+			unset($params['sig']);
+
+			return $sig == $this->sign($params, $this->app_secret_key);
+		}
+
+		return false;
 	}
 
-	public function error($error_code, $error_msg, $critical = false) {
-		return json_encode(
-			array(
-				'error' => array(
-					'error_code' => $error_code,
-					'error_msg'  => $error_msg,
-					'critical'   => $critical
-				)
-			));
+	public function response($data) {
+		return '<?xml version="1.0" encoding="UTF-8"?><callbacks_payment_response xmlns="http://api.forticom.com/1.0/">' . $data . '</callbacks_payment_response>';
+	}
+
+	public function error($error_code, $error_msg) {
+		return
+			'<?xml version="1.0" encoding="UTF-8"?><ns2:error_response xmlns:ns2="http://api.forticom.com/1.0/"><error_code>' . $error_code .
+			'</error_code><error_msg>' . $error_msg . '</error_msg></ns2:error_response>';
 	}
 
 	public function upload($url, $files) {
