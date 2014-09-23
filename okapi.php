@@ -41,7 +41,7 @@ class OKAPI {
 			$params['sig'] = $this->sign($params, $this->app_secret_key);
 		}
 
-		$query = $this->api_url . '?' . http_build_query($params);
+		$url = $this->api_url . '?' . http_build_query($params);
 
 		$context = stream_context_create(
 			array(
@@ -52,7 +52,11 @@ class OKAPI {
 					)
 			));
 
-		$response = json_decode($r = file_get_contents($query, false, $context), true);
+		$response = json_decode(@file_get_contents($url, false, $context), true);
+
+		if (is_null($response)) {
+			throw new \Exception('FS server did not respond on time', 500);
+		}
 
 		if (isset($response['error_msg'])) {
 			throw new \Exception($response['error_msg']);
@@ -123,7 +127,11 @@ class OKAPI {
 				)
 			));
 
-		$response = json_decode(file_get_contents($url, false, $context), true);
+		$response = json_decode(@file_get_contents($url, false, $context), true);
+
+		if (is_null($response)) {
+			throw new \Exception('FS server did not respond on time', 500);
+		}
 
 		if (isset($response['error'])) {
 			throw new \Exception("{$response['error']['error_msg']}", $response['error']['error_code']);
