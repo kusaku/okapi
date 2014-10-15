@@ -20,7 +20,7 @@ class OKAPI {
 	public function __construct($cfg) {
 		// set default
 		$cfg += array(
-			'api_url' => 'http://api.ok.ru/fb.do',
+			'api_url' => 'http://api.odnoklassniki.ru/api',
 		);
 
 		$this->api_url        = $cfg['api_url'];
@@ -31,7 +31,6 @@ class OKAPI {
 
 	public function exec($method, $params = array(), $client = false) {
 		$params['application_key'] = $this->app_key;
-		$params['method']          = $method;
 		$params['format']          = 'JSON';
 
 		if ($client) {
@@ -41,7 +40,9 @@ class OKAPI {
 			$params['sig'] = $this->sign($params, $this->app_secret_key);
 		}
 
-		$url = $this->api_url . '?' . http_build_query($params);
+		list($group, $name) = explode('.', $method);
+
+		$url = "{$this->api_url}/{$group}/{$name}?" . http_build_query($params);
 
 		$context = stream_context_create(
 			array(
